@@ -1,82 +1,149 @@
-<style>
-	*{ margin:0; padding:0;}
-	button, input{ outline:none;}
-	button, .login{ width:120px; height:42px; background:#f40; color:#fff; border:none; border-radius:6px; display: block; margin:20px auto; cursor: pointer;}
-	.popOutBg{ width:100%; height:100%; position: fixed; left:0; top:0; background:rgba(0,0,0,.6); display: none;}
-	.popOut{ position:fixed; width:600px; height:300px; top:50%; left:50%; margin-top:-150px; margin-left:-300px; background:#fff; border-radius:8px; overflow: hidden; display: none;}
-	.popOut > span{ position: absolute; right:10px; top:0; height:42px; line-height:42px; color:#000; font-size:30px; cursor: pointer;}
-	.popOut table{ display: block; margin:42px auto 0; width:520px;}
-	.popOut caption{ width:520px; text-align: center; color:#f40; font-size:18px; line-height:42px;}
-	.popOut table tr td{ color:#666; padding:6px; font-size:14px;}
-	.popOut table tr td:first-child{ text-align: right;}
-	.inp{ width:280px; height:30px; line-height:30px; border:1px solid #999; padding:5px 10px; color:#000; font-size:14px; border-radius:6px;}
-	.inp:focus{ border-color:#f40;}
-	@keyframes ani{
-		from{
-			transform:translateX(-100%) rotate(-60deg) scale(.5);
-		}
-		50%{
-			transform:translateX(0) rotate(0) scale(1);
-		}
-		90%{
-			transform:translateX(20px) rotate(0) scale(.8);
-		}
-		to{
-			transform:translateX(0) rotate(0) scale(1);
-		}
-	}
-	.ani{ animation:ani .5s ease-in-out;}
+﻿<!DOCTYPE html>
+<!-本页面程序来自yaofan.net.cn,AY苏七做二次修改,小辉在苏七基础上把远程素材搬到本地->
+<html lang="zh-cn">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+<title>乞丐</title>
+<meta name="keywords" content="要饭网,小乞丐,广告"/>
+<meta name="description" content="爱收集测试源码"/>
+<meta name="viewport" content="width=device-width, initial-scale=0.9">
+<script type="text/javascript" src="/sc/jquery-1.8.3.min.js"></script>
+<style type="text/css">
+.content{width:80%;margin:10px auto;}
+.hide_box{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+.shang_box{width:540px;height:540px;padding:8px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+.shang_box img{border:none;border-width:0;}
+.dashang,.zhuce{display:block;width:100px;margin:5px auto;height:40px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+.zhuce{background-color:#2496f1;}
+.dashang:hover,.zhuce:hover{opacity:0.8;padding:10px;font-size:18px;}
+.shang_close{float:right;display:inline-block;}
+.shang_logo{display:block;text-align:center;margin:20px auto;}
+.shang_tit{width: 100%;height: 75px;text-align: center;line-code-bgpx;color: #a3a3a3;font-size: 16px;background: url('img/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+.shang_tit p{color:#a3a3a3;text-align:center;font-size:16px;}
+.shang_payimg{width:160px;padding:5px;border:6px solid #EA5F00;margin:0 auto;border-radius:3px;height:160px;}
+.shang_payimg img{display:block;text-align:center;width:140px;height:140px; }
+.pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+.radiobox{width: 16px;height: 16px;background: url('img/radio2.jpg');display: block;float: left;margin-top: 5px;margin-right: 14px;}
+.checked .radiobox{background:url('img/radio1.jpg');}
+.shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:280px;}
+.shang_payselect .pay_item{display:inline-block;margin-right:10px;float:left;}
+.shang_info{clear:both;}
+.shang_info p , .shang_info a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+@media (max-width:767px){
+.shang_box{width:90%;height:auto;padding:8px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;margin-left:-45%;margin-top:-50%;border:1px dotted #dedede;display:none;}
+}
 </style>
-
-<button type="button">登录</button>
-<div class="popOutBg"></div>
-<div class="popOut">
-	<span title="关闭"> x </span>
-	<form id="form-login" action="error.php" method="post" class="form-horizontal">
-	<table>
-		<caption>欢迎登录本网站</caption>
-		<tr>
-			<td width="120">用户名：</td>
-			<td><input type="text" class="inp" name="user" placeholder="请输入用户名" /></td>
-		</tr>
-		<tr>
-			<td>密码：</td>
-			<td><input type="password" class="inp" name="pass" placeholder="请输入密码" /></td>
-		</tr>
-		<tr>
-			<td colspan="2"><button type="submit" class="btn btn-effect-ripple btn-block btn-info" style="border-radius: 80px; overflow: hidden; position: relative;"><i class="fa fa-check"></i>登录</button>></td>
-			
-		</tr>
-	</table>
-	</form>
+<link rel="stylesheet" href="sc/bootstrap.min.css">
+</head>
+<body background="img/bg.jpg">
+<div class="container" style="padding-top:20px;">
+<div class="col-xs-12 col-sm-10 col-lg-8 center-block" style="float: none;">
+<div class="panel panel-primary">
+<div class="panel-heading" style="background: linear-gradient(to right,#8ae68a,#5ccdde,#b221ff);">
+<center>
+<font color="#000000">
+<b>穷的吃土了，点击广告即可赞助站长...</b>
+</font>
+</center>
 </div>
-
+<div class="panel-body">
+<center>
+<div class="alert alert-success">
+<a href=""><img class="img-circle m-b-xs" style="border: 2px solid #1281FF; margin-left:3px; margin-right:3px;" src="https://q4.qlogo.cn/headimg_dl?dst_uin=这里填写你的QQ&spec=100" ; width="60px" height="60px" alt="要饭网"><br></a>快刷新页面点击广告来赞助站长站长吧~</div>
+</center>
+<form name=alipayment action="" method=post target="_blank">
+<center>
+<div class="content">
+<p><a href="" onClick="dashangToggle()" class="dashang" title="刷新页面">1.刷新页面</a></p>
+<p><a href="javascript:void(0)" onClick="dashangToggle()" class="dashang" title="打赏，支持一下">2.扫码打赏</a></p>
+<div class="hide_box" onClick="dashangToggle()"></div>
+<div class="shang_box">
+<a class="shang_close" href="javascript:void(0)" onClick="dashangToggle()" title="关闭"><img src="/img/close.jpg" alt="取消" /></a>
+<div class="shang_tit">
+<p>感谢您的支持，我会继续努力的!</p>
+</div>
+<div class="shang_payimg"><img src="img/3h1.jpg" alt="扫码支持" title="扫一扫" /></div>
+<div class="pay_explain">扫码打赏，你说多少就多少</div>
+<div class="shang_payselect">
+<div class="pay_item checked" data-id="alipay" data-src="/img/zfb.jpg">
+<span class="radiobox"></span>
+<span class="pay_logo"><img src="img/alipay.jpg" alt="支付宝" /></span>
+</div>
+<div class="pay_item" data-id="weipay" data-src="img/wx.png">
+<span class="radiobox"></span>
+<span class="pay_logo"><img src="img/wechat.jpg" alt="微信" /></span>
+</div>
+</div>
+<div class="shang_info">
+<p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+<p>手机直接保存图片,扫一扫识别二维码,即可进行扫码打赏哦</p>
+</div>
+</div>
+</div>
 <script type="text/javascript">
-	function $(param){
-		if(arguments[1] == true){
-			return document.querySelectorAll(param);
-		}else{
-			return document.querySelector(param);
-		}
-	}
-	function ani(){
-		$(".popOut").className = "popOut ani";
-	}
-	$("button").onclick = function(){
-		$(".popOut").style.display = "block";
-		ani();
-		$(".popOutBg").style.display = "block";
-	};
-	$(".popOut > span").onclick = function(){
-		$(".popOut").style.display = "none";
-		$(".popOutBg").style.display = "none";
-	};
-	$(".popOutBg").onclick = function(){
-		$(".popOut").style.display = "none";
-		$(".popOutBg").style.display = "none";
-	};
+$(function() {
+$(".pay_item").click(function() {
+$(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+var dataid = $(this).attr('data-id');
+var datasrc = $(this).attr('data-src');
+$(".shang_payimg img").attr("src",datasrc);
+$("#shang_pay_txt").text(dataid == "alipay" ? "支付宝": "微信");
+});
+});
+function dashangToggle() {
+$(".hide_box").fadeToggle();
+$(".shang_box").fadeToggle();
+}
 </script>
-
-<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
-
+</center>
+<center><img src="img/zhutu.jpg" style="max-width: 90%;height: auto;width: auto;"></center>
+<br>
+<center><img src="img/qqpay.png" style="max-width: 90%;height: auto;width: auto;"></center>
+<br>
+<center><img src="img/zfb.jpg" style="max-width: 90%;height: auto;width: auto;"></center>
+<br>
+<center><img src="img/wx.png" style="max-width: 90%;height: auto;width: auto;"></center>
+<br>
+<center>
+<div class="alert alert-warning">
+本站打赏方式有两种：
+<br/>1.刷新页面后点击出现的广告！
+<br/>2.直接扫码打款！
 </div>
+</center>
+<center>
+<div class="btn-group btn-group-justified" role="group" aria-label="...">
+<div class="btn-group" role="group"><a href="填写你的友情链接" rel="nofollow" type="radio" name="type" class="btn btn-info">友情链接</a></div>
+<div class="btn-group" role="group"><a href="填写友情链接" type="radio" name="type" class="btn btn-primary">友情链接</a></div>
+<div class="btn-group" role="group"><a href="https://jq.qq.com/?_wv=1027&k=57d6hj6" type="radio" name="type" class="btn btn-danger">加入群聊</a></div>
+</div>
+</center>
+</form>
+</div>
+<br>
+<p style="text-align:center"><a href="">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://power-login.65esd.cn/Register?tj=5628&kf=yd
+">其他</a></p>
+<p style="text-align:center">&copy; (c)2020 YAOFAN All Rights Reserved</p>
+<br>
+<br>
+</div>
+</div>
+</div>
+<audio autoplay="autoplay" height="100" width="100" loop>
+<source src="sc/yaofan.mp3" type="audio/mp3" />
+</audio>
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?4746e57c2029b57c189e723b3b2e9544";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+<!-- <script  src="https://hm.yimilm.com/slot?3567994479595606489-95"></script> -->
+//这里改成你自己的广告代码就行了
+</body>
+</html>
