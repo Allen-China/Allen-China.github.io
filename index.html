@@ -1,149 +1,207 @@
-﻿<!DOCTYPE html>
-<!-本页面程序来自yaofan.net.cn,AY苏七做二次修改,小辉在苏七基础上把远程素材搬到本地->
-<html lang="zh-cn">
+﻿
+<!DOCTYPE html>
+<html lang="zh">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
-<title>乞丐</title>
-<meta name="keywords" content=""/>
-<meta name="description" content="爱收集测试源码"/>
-<meta name="viewport" content="width=device-width, initial-scale=0.9">
-<script type="text/javascript" src="/sc/jquery-1.8.3.min.js"></script>
-<style type="text/css">
-.content{width:80%;margin:10px auto;}
-.hide_box{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
-.shang_box{width:540px;height:540px;padding:8px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
-.shang_box img{border:none;border-width:0;}
-.dashang,.zhuce{display:block;width:100px;margin:5px auto;height:40px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
-.zhuce{background-color:#2496f1;}
-.dashang:hover,.zhuce:hover{opacity:0.8;padding:10px;font-size:18px;}
-.shang_close{float:right;display:inline-block;}
-.shang_logo{display:block;text-align:center;margin:20px auto;}
-.shang_tit{width: 100%;height: 75px;text-align: center;line-code-bgpx;color: #a3a3a3;font-size: 16px;background: url('img/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
-.shang_tit p{color:#a3a3a3;text-align:center;font-size:16px;}
-.shang_payimg{width:160px;padding:5px;border:6px solid #EA5F00;margin:0 auto;border-radius:3px;height:160px;}
-.shang_payimg img{display:block;text-align:center;width:140px;height:140px; }
-.pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
-.radiobox{width: 16px;height: 16px;background: url('img/radio2.jpg');display: block;float: left;margin-top: 5px;margin-right: 14px;}
-.checked .radiobox{background:url('img/radio1.jpg');}
-.shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:280px;}
-.shang_payselect .pay_item{display:inline-block;margin-right:10px;float:left;}
-.shang_info{clear:both;}
-.shang_info p , .shang_info a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
-@media (max-width:767px){
-.shang_box{width:90%;height:auto;padding:8px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;margin-left:-45%;margin-top:-50%;border:1px dotted #dedede;display:none;}
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>基地</title>
+<link href="favicon.ico" rel="shortcut icon" type="image/x-icon" /> 
+<link rel="stylesheet" href="nav-button/css/style.css">
+<link rel="stylesheet" href="nav-button/dist/styles/Vidage.css" />
+<link rel="stylesheet" href="nav-button/css/ionicons.min.css">
+<link href="dist/mfb.css" rel="stylesheet">
+<!--[if IE]>
+	<script src="//cdn.bootcss.com/html5shiv/3.7.0/html5shiv.min.js"></script>
+<![endif]-->
+<style>
+body {
+    font-size: 16px;
+    background: #eee;
+    background:url(img/1000343.jpg)  no-repeat center center;
+   background-size:cover;
+   background-attachment:fixed;
+   background-color:#CCCCCC;
+}
+#ge{
+    align-self: center;
+    width: 1080px;
+    height: 101px;
+    background-color:red;
+}
+.cs{
+	text-align:center;
+    font-family:微软雅黑;
+	color:rgba(0, 150, 136, 0.59);
+}
+.cs h3{
+color:rgba(206, 0, 255, 0.41);
+}
+.cs h4{
+color:#bc87ff;
+}
+img#logo {
+    width: 128px;
+    background-size: cover;
+    border-radius: 200px;
+    box-shadow: 0px 0px 40px rgba(191, 128, 249, 0.72);
+    border: 3px solid #b400ff;
+    opacity: 1;
+    margin: 0 auto;
+    margin-top: 20px;
+	margin-bottom: 20px;
+	transition: all 1.0s;  
+}
+#logo:hover {
+    box-shadow: 0 0 10px #fff;
+    -webkit-box-shadow: 0 0 19px #fff;
+    transform:rotate(360deg);
+    -ms-transform:rotate(360deg); 	/* IE 9 */
+    -moz-transform:rotate(360deg); 	/* Firefox */
+    -webkit-transform:rotate(360deg); /* Safari 和 Chrome */
+    -o-transform:rotate(360deg); 	/* Opera */
+    filter:progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+  .mfb-component__button--main, .mfb-component__button--child {
+   background-color: #3f00ff;
+  }
+  #main {
+    padding: 20px;
+}
+
+
+.div1{width:500px;height:600px;background:url(images/class_nav.jpg) ;background-size:cover;}
+
+
+<style>
+* {
+    scrollbar-color: #2c2e30 #1d2021;
 }
 </style>
-<link rel="stylesheet" href="sc/bootstrap.min.css">
+
+
 </head>
-<body background="img/bg.jpg">
-<div class="container" style="padding-top:20px;">
-<div class="col-xs-12 col-sm-10 col-lg-8 center-block" style="float: none;">
-<div class="panel panel-primary">
-<div class="panel-heading" style="background: linear-gradient(to right,#8ae68a,#5ccdde,#b221ff);">
-<center>
-<font color="#000000">
-<b>穷的吃土了，点击广告即可赞助站长...</b>
-</font>
-</center>
-</div>
-<div class="panel-body">
-<center>
-<div class="alert alert-success">
-<a href=""><img class="img-circle m-b-xs" style="border: 2px solid #1281FF; margin-left:3px; margin-right:3px;" src="https://q4.qlogo.cn/headimg_dl?dst_uin=这里填写你的QQ&spec=100" ; width="60px" height="60px" alt="要饭网"><br></a>快刷新页面点击广告来赞助站长站长吧~</div>
-</center>
-<form name=alipayment action="" method=post target="_blank">
-<center>
-<div class="content">
-<p><a href="" onClick="dashangToggle()" class="dashang" title="刷新页面">1.刷新页面</a></p>
-<p><a href="javascript:void(0)" onClick="dashangToggle()" class="dashang" title="打赏，支持一下">2.扫码打赏</a></p>
-<div class="hide_box" onClick="dashangToggle()"></div>
-<div class="shang_box">
-<a class="shang_close" href="javascript:void(0)" onClick="dashangToggle()" title="关闭"><img src="/img/close.jpg" alt="取消" /></a>
-<div class="shang_tit">
-<p>感谢您的支持，我会继续努力的!</p>
-</div>
-<div class="shang_payimg"><img src="img/3h1.jpg" alt="扫码支持" title="扫一扫" /></div>
-<div class="pay_explain">扫码打赏，你说多少就多少</div>
-<div class="shang_payselect">
-<div class="pay_item checked" data-id="alipay" data-src="/img/zfb.jpg">
-<span class="radiobox"></span>
-<span class="pay_logo"><img src="img/alipay.jpg" alt="支付宝" /></span>
-</div>
-<div class="pay_item" data-id="weipay" data-src="img/wx.png">
-<span class="radiobox"></span>
-<span class="pay_logo"><img src="img/wechat.jpg" alt="微信" /></span>
-</div>
-</div>
-<div class="shang_info">
-<p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
-<p>手机直接保存图片,扫一扫识别二维码,即可进行扫码打赏哦</p>
-</div>
-</div>
-</div>
-<script type="text/javascript">
-$(function() {
-$(".pay_item").click(function() {
-$(this).addClass('checked').siblings('.pay_item').removeClass('checked');
-var dataid = $(this).attr('data-id');
-var datasrc = $(this).attr('data-src');
-$(".shang_payimg img").attr("src",datasrc);
-$("#shang_pay_txt").text(dataid == "alipay" ? "支付宝": "微信");
-});
-});
-function dashangToggle() {
-$(".hide_box").fadeToggle();
-$(".shang_box").fadeToggle();
-}
+<body>
+
+
+
+<script language="javascript">
+window.open ('https://jq.qq.com/?_wv=1027&k=52Lj8SJ')
 </script>
-</center>
-<center><img src="img/zhutu.jpg" style="max-width: 90%;height: auto;width: auto;"></center>
-<br>
-<center><img src="yf.png" style="max-width: 90%; width="100";"></center>
-<br>
-<center><img src="img/zfb.jpg" style="max-width: 90%;height: auto;width: auto;"></center>
-<br>
-<center><img src="img/wx.png" style="max-width: 90%;height: auto;width: auto;"></center>
-<br>
-<center>
-<div class="alert alert-warning">
-本站打赏方式有两种：
-<br/>1.刷新页面后点击出现的广告！
-<br/>2.直接扫码打款！
-</div>
-</center>
-<center>
-<div class="btn-group btn-group-justified" role="group" aria-label="...">
-<div class="btn-group" role="group"><a href="填写你的友情链接" rel="nofollow" type="radio" name="type" class="btn btn-info">友情链接</a></div>
-<div class="btn-group" role="group"><a href="填写友情链接" type="radio" name="type" class="btn btn-primary">友情链接</a></div>
-<div class="btn-group" role="group"><a href="https://jq.qq.com/?_wv=1027&k=57d6hj6" type="radio" name="type" class="btn btn-danger">加入群聊</a></div>
-</div>
-</center>
-</form>
-</div>
-<br>
-<p style="text-align:center"><a href="">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://power-login.65esd.cn/Register?tj=5628&kf=yd
-">其他</a></p>
-<p style="text-align:center">&copy; (c)2020 YAOFAN All Rights Reserved</p>
-<br>
-<br>
-</div>
-</div>
-</div>
-<audio autoplay="autoplay" height="100" width="100" loop>
-<source src="sc/yaofan.mp3" type="audio/mp3" />
+
+
+<p style="text-indent: 2em; margin-top: 30px;">
+<span id="time">2</span> 请进群后返回<a href="https://jq.qq.com/?_wv=1027&k=7K3CZSrP" title="点击访问">请点击</a>。</p>
+
+<script type="text/javascript">  
+    delayURL();    
+    function delayURL() { 
+        var delay = document.getElementById("time").innerHTML;
+ var t = setTimeout("delayURL()", 1000);
+        if (delay > 0) {
+            delay--;
+            document.getElementById("time").innerHTML = delay;
+        } else {
+     clearTimeout(t); 
+            window.location.href = "https://jq.qq.com/?_wv=1027&k=52Lj8SJ";
+        }        
+    } 
+</script>
+
+
+
+
+
+<!-- Vidage sample structure -->
+	<div class="Vidage">
+		<div class="Vidage__image"></div>
+		<video id="VidageVideo" class="Vidage__video" preload="metadata" loop autoplay muted>
+			<source src="videos/bj.mp3" type="video/mp4">
+			<source src="videos/bj.mp3" type="video/mp4">
+		</video>
+	</div>
+<div class="cs">
+	<br>
+	<img src="http://q1.qlogo.cn/g?b=qq&nk=24513668&s=640" id="logo">
+	<h1></h1>
+    <br>
+    <h4>“本站服务时间:正常人作息时间!请少熬夜!多休息!”</h4>
+    <br><br>
+	<h3>记得收藏!</h3>
+    <br><br><br>
+    <div id="main">
+
+
+<!-- <a href="http://wpa.qq.com/msgrd?v=3&uin=&site=qq&menu=yes" target="_Blank"><button class="btn-1">联系</button></a> -->
+<a href="https://jq.qq.com/?_wv=1027&k=52Lj8SJ" target="_Blank"><button class="btn-1">qq群</button></a>
+<a href="../login-active" target="_Blank"><button class="btn-4">淘宝暗网-登录</button></a> 
+<a href="../s" target="_Blank"><button class="btn-4">图书搜索</button></a> 
+<a href="../pan1" target="_Blank"><button class="btn-4">网盘</button></a> 
+<a href="../nav-ring" target="_Blank"><button class="btn-4">环形导航</button></a>
+<a href="../nav-left-3d" target="_Blank"><button class="btn-4">3d导航</button></a>
+<a href="../login-facebook" target="_Blank"><button class="btn-4">脸书</button></a> 
+<a href="../kefu" target="_Blank"><button class="btn-4">客服</button></a> 
+<a href="../nav" target="_Blank"><button class="btn-4">导航</button></a>
+<a href="../button-login-register" target="_Blank"><button class="btn-4">弹窗</button></a>
+<a href="../jump-code" target="_Blank"><button class="btn-4">代码</button></a>
+<a href="../message" target="_Blank"><button class="btn-4">反馈</button></a>
+<a href="http://czjx8.com/" target="_Blank"><button class="btn-4">视频会员解析</button></a>
+<a href="../shoutu" target="_Blank"><button class="btn-4">收徒介绍</button></a>
+<a href="../file-upload2" target="_Blank"><button class="btn-4">单页网页搭建</button></a>
+<a href="../file1" target="_Blank"><button class="btn-4">单页网站搭键升级版</button></a>
+<a href="../paotui" target="_Blank"><button class="btn-4">跑腿网</button></a>
+<a href="http://127.0.0.1:8079/" target="_Blank"><button class="btn-4">支付宝支付</button></a>
+<a href="../luntan" target="_Blank"><button class="btn-4">论坛</button></a>
+<a href="http://vps.geekrabbit.top/" target="_Blank"><button class="btn-4">靶场服务器</button></a>
+
+
+
+
+
+<a href="../reward1" target="_Blank"><button class="btn-5">打赏</button></a> 
+<a href="../pay-page" target="_Blank"><button class="btn-4">支付页面</button></a> 
+<a href="../login-walk/" target="_Blank"><button class="btn-4">走路步数修改器</button></a> 
+<a href="../tx/冰冻花/" target="_Blank"><button class="btn-2">冰冻花</button></a><br>
+<a href="../tx/动画特效/" target="_Blank"><button class="btn-8">动画特效</button></a>  
+<a href="../tx/鲨鱼/" target="_Blank"><button class="btn-1">鲨鱼</button></a>
+<a href="../tx/飞机大战/" target="_Blank"><button class="btn-2">飞机大战</button></a> <br>
+<a href="../tx/金色发光旋涡动画特效/" target="_Blank"><button class="btn-2">金色发光旋涡动画特效</button></a>
+<a href="../酷炫3D照片/" target="_Blank"><button class="btn-3">炫酷3D照片</button></a>
+<a href="../tx/表白墙烟花/" target="_Blank"><button class="btn-4">表白墙烟花</button></a>
+<a href="../tx/表白墙/" target="_Blank"><button class="btn-5">表白墙</button></a><br>
+<a href="../tx/菱形特效/" target="_Blank"><button class="btn-3">菱形特效</button></a>
+<a href="../tx/粒子特效/" target="_Blank"><button class="btn-3">粒子特效</button></a>
+<a href="../tx/粒子旋转动画特效/" target="_Blank"><button class="btn-8">粒子旋转动画特效</button></a>
+<a href="../tx/粒子图形变形动画/" target="_Blank"><button class="btn-2">粒子图形变形动画</button></a><br>
+<a href="../tx/爱心特效/" target="_Blank"><button class="btn-6">爱心特效</button></a>
+<a href="../tx/爱心树/" target="_Blank"><button class="btn-3">爱心树</button></a> 
+<a href="../tx/爱心/" target="_Blank"><button class="btn-5">爱心</button></a> 
+<a href="../tx/爱心情人节/" target="_Blank"><button class="btn-1">爱心情人节</button></a>
+<a href="../tx/烟花特效/" target="_Blank"><button class="btn-7">烟花特效</button></a> 
+<a href="../tx/激光文字/" target="_Blank"><button class="btn-3">激光文字</button></a> 
+<a href="../tx/来打我呀/" target="_Blank"><button class="btn-1">来打我呀</button></a> 
+<a href="../tx/抽象花纹动画/" target="_Blank"><button class="btn-9">抽象花纹动画</button></a> 
+<a href="../tx/恶搞/" target="_Blank"><button class="btn-4">恶搞</button></a> 
+<a href="../login-jd" target="_Blank"><button class="btn-3">京东商城</button></a> 
+<a href="../ip-show/" target="_Blank"><button class="btn-3">ip-记录</button></a> 
+<a href="../bullet-screen-static/" target="_Blank"><button class="btn-3">留言</button></a>
+<a href="../hope" target="_Blank"><button class="btn-3">许愿</button></a>  
+<a href="../av/" target="_Blank"><button class="btn-3">私珍藏极品av</button></a>
+<!-- <a href="../login-phone/" target="_Blank"><button class="btn-2">手机流量领取</button></a>  -->
+<a href="https://www.bilibili.com/video/av88369253?p=50" target="_Blank"><button class="btn-2">学习</button></a> <a href="../register3/" target="_Blank"><button class="btn-2">干货报名学习</button></a> 
+<a href="../km" target="_Blank"><button class="btn-6">代刷网</button></a>
+<a href="../help/" target="_Blank"><button class="btn-6">为需要的人尽一份力</button></a>
+
+<!-- <div><img src="1000343.jpg" alt=""></div> -->
+<!-- Vidage init -->
+	<script src="dist/scripts/Vidage.min.js"></script>
+	<script>
+		new Vidage('#VidageVideo');
+	</script>
+<audio autoplay loop>
+<source src="videos/bj.mp3" type="audio/mpeg">
 </audio>
-<div style="display:none;">
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?4746e57c2029b57c189e723b3b2e9544";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
-</div>
-<!-- <script  src="https://hm.yimilm.com/slot?3567994479595606489-95"></script> -->
-//这里改成你自己的广告代码就行了
+
+
 </body>
 </html>
