@@ -1,0 +1,243 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+	background-size:100px 100px;
+	background-repeat:repeat;	
+	margin: 0;
+	padding: 0;
+}
+
+div, a, p, img, blockquote, form, fieldset, textarea, input, label, iframe, code, pre {
+	display: block;
+	position:relative;
+}
+
+a {
+	text-decoration: none;
+}
+
+.clear {
+	clear: both;
+	height: 0px;
+	line-height: 0px;
+}
+
+.decoration{ 
+	height:1px;
+	background-color:rgba(0,0,0,0.1);
+	margin-bottom:20px;
+	display:block;
+	clear:both;
+}
+
+
+
+@charset "utf-8";
+/* CSS Document */
+
+
+.landing-page .decoration{
+	margin-bottom:30px;
+	margin-left:20px;
+	margin-right:20px;
+}
+
+.top-deco{
+	background-color:#e34e47;
+	height:5px;
+	width:100%;
+	display:block;
+	margin-bottom:30px;
+}
+
+.bottom-deco{
+	background-color:#e34e47;
+	height:5px;
+	display:block;
+	width:100%;
+	margin-top:16px;
+}
+
+
+.landing-navigation{
+	margin-bottom:10px;
+	width:300px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.landing-navigation	a{
+	float:left;
+	margin-left:12px;
+	margin-right:12px;
+	margin-bottom:20px;
+}
+
+.landing-navigation a em{
+	color:#646569;
+	font-family:'Dosis', sans-serif;
+	font-style:normal;
+	text-align:center;
+	display:block;
+	font-size:14px;
+	font-weight:400;
+	padding-top:10px;
+}
+
+.nav-icon{
+	width:35px;
+	heigh:35px;
+	position:absolute;
+	z-index:99999;
+	margin-left:20px;
+	margin-top:20px;
+}
+
+.nav-image{
+	border-radius:80px;
+	width:75px;
+	height:75px;
+}
+
+.nav-overlay{
+	width:75px;
+	height:75px;
+	border-radius:60px;
+	position:absolute;
+	z-index:99998;
+	background-color:rgba(0,0,0,0.7);
+}
+
+.slider-container{
+	overflow:hidden!important;
+}
+
+.overlay{
+	pointer-events:none;
+	position:absolute;
+	width:100%;
+	height:100%;
+	background-color:rgba(0,0,0,0.5);
+	z-index:9999;
+}
+
+/* iPads (landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (orientation : landscape) {
+	.landing-navigation-tablet-top-adjustment{
+		height:30px;
+		display:block;
+	}
+	
+	.landing-navigation-tablet-bottom-adjustment{
+		margin-bottom:-20px;
+	}
+	
+	.landing-navigation{
+		width:900px!important;
+	}
+	
+	.landing-page .decoration{
+		margin-top:20px;
+		margin-bottom:20px;
+		margin-left:50px!important;
+		margin-right:50px!important;
+	}
+	
+}
+
+/* iPads (landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (orientation : portrait) {
+	
+	.landing-navigation-tablet-top-adjustment{
+		height:57px;
+		display:block;
+	}
+	
+	.landing-navigation-tablet-bottom-adjustment{
+		margin-bottom:17px;
+	}
+	
+}
+
+@media only screen 
+and (min-device-width : 798px)
+and (min-device-height: 801px){
+	.landing-navigation-tablet-top-adjustment{
+		display:none;
+	}
+	.landing-navigation-tablet-bottom-adjustment{
+		margin-top:-80px;
+	}
+}
+
+@media (min-width:760px) { 
+
+	.navigation{
+		width:300px!important;
+		right:0px;
+	}
+
+	.landing-page .decoration{
+		margin-top:50px;
+		margin-bottom:50px;
+		margin-left:150px;
+		margin-right:150px;
+	}
+	
+	.landing-logo{
+		margin-top:50px;
+	}
+
+	.landing-navigation{
+		margin-bottom:10px;
+		width:450px;
+		margin-left:auto;
+		margin-right:auto;
+	}
+
+	.landing-navigation a em{
+		padding-top:20px;
+		font-size:16px;
+		font-weight:500;
+	}
+	
+	.landing-navigation	a{
+		float:left;
+		margin-left:23px;
+		margin-right:25px;
+		margin-bottom:50px;
+	}
+
+	.nav-icon{
+		width:40px;
+		heigh:40px;
+		position:absolute;
+		z-index:99999;
+		margin-left:30px;
+		margin-top:30px;
+	}
+	
+	.nav-image{
+		border-radius:80px;
+		width:100px;
+		height:100px;
+	}
+	
+	.nav-overlay{
+		width:100px;
+		height:100px;
+		border-radius:60px;
+		position:absolute;
+		z-index:99998;
+		background-color:rgba(0,0,0,0.7);
+	}
+	
+	.bottom-deco{
+		bottom:0px;	
+	}
+}
