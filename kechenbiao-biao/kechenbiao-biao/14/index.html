@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一4班课程表</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      text-align: center;
+    }
+
+    .dayHighlight {
+      background-color: black;
+      font-size: 3em;
+      font-weight: bold;
+      color: yellow; /* 设置字体颜色为黄色 */
+    }
+
+    .dateAndTime {
+      font-size: 2em;
+    }
+
+    .course {
+      font-size: 2em;
+    }
+
+    .currentTimeCourse {
+      font-size: 3em;
+    }
+
+    .currentTimePeriod {
+      font-size: 3em;
+      font-weight: bold; /* 设置字体加粗 */
+      color: yellow; /* 设置字体颜色为黄色 */
+    }
+
+    table {
+      border-collapse: collapse;
+      margin: auto;
+    }
+
+    th, td {
+      border: 1px solid white;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body onload="getCSVData()"> 
+  <div id="csvContent"></div> 
+
+  <script>
+    function getCSVData() {
+      let headers = new Headers();
+      headers.append('Content-Type', 'text/csv');
+
+      fetch('http://211.149.232.25:55/kechenbiao-biao/14/14.csv', { headers })
+        .then(response => response.text())
+        .then(data => {
+          let lines = data.split('\n');
+          let headers = lines[0].split(',');
+          let dayOfWeek = new Date().getDay() + 1;
+
+          // 获取当前时间
+          let now = new Date();
+          let currentHour = now.getHours();
+          let currentMinute = now.getMinutes();
+
+          let tableHtml = '<table>';
+          for (let header of headers) {
+            if (header.includes('Date') || header.includes('Time')) {
+              if (header.includes('Time') && headers.indexOf(header) === dayOfWeek) {
+                tableHtml += `<th class="dayHighlight">${header}</th>`; // 突出显示当前星期对应的时间段
+              } else {
+                tableHtml += `<th class="dateAndTime">${header}</th>`;
+              }
+            } else if (header.includes('Course')) {
+              tableHtml += `<th class="course">${header}</th>`;
+            } else {
+              tableHtml += `<th>${header}</th>`;
+            }
+          }
+          for (let i = 1; i < lines.length; i++) {
+            let cells = lines[i].split(',');
+            tableHtml += '<tr>';
+            for (let j = 0; j < cells.length; j++) {
+              if (j === dayOfWeek) {
+                tableHtml += `<td class="dayHighlight">${cells[j]}</td>`;
+              } else {
+                if (headers[j].includes('Date') || headers[j].includes('Time')) {
+                  // 判断是否为当前时间所在的时间段
+                  let timeCell = cells[j];
+                  let timeParts = timeCell.split('-');
+                  let startHour = parseInt(timeParts[0].split(':')[0]);
+                  let startMinute = parseInt(timeParts[0].split(':')[1]);
+                  let endHour = parseInt(timeParts[1].split(':')[0]);
+                  let endMinute = parseInt(timeParts[1].split(':')[1]);
+
+                  if ((currentHour > startHour || (currentHour === startHour && currentMinute >= startMinute)) &&
+                      (currentHour < endHour || (currentHour === endHour && currentMinute <= endMinute))) {
+                    tableHtml += `<td class="currentTimePeriod">${timeCell}</td>`;
+                  } else {
+                    tableHtml += `<td class="dateAndTime">${timeCell}</td>`;
+                  }
+                } else if (headers[j].includes('Course')) {
+                  // 判断是否为当前时间对应的课程时间段
+                  if (parseInt(cells[j - 1].split(':')[0]) <= currentHour &&
+                      parseInt(cells[j - 1].split(':')[0]) + (cells[j - 1].includes('AM') ? 0 : 12) >= currentHour + (currentMinute >= 30 ? 1 : 0)) {
+                    tableHtml += `<td class="currentTimeCourse">${cells[j]}</td>`;
+                  } else {
+                    tableHtml += `<td class="course">${cells[j]}</td>`;
+                  }
+                } else {
+                  tableHtml += `<td>${cells[j]}</td>`;
+                }
+              }
+            }
+            tableHtml += '</tr>';
+          }
+          tableHtml += '</table>';
+          document.getElementById('csvContent').innerHTML = tableHtml;
+        })
+        .catch(error => {
+          console.error('Error fetching CSV data:', error);
+        });
+    }
+
+    // 每隔5分钟刷新一次数据
+    setInterval(getCSVData, 5 * 60 * 1000);
+  </script>
+</body>
+
+</html>
