@@ -58,7 +58,7 @@
       let headers = new Headers();
       headers.append('Content-Type', 'text/csv');
 
-      fetch('http://211.149.232.25:55/kechenbiao-biao/11/14.csv', { headers })
+      fetch('https://allen-china.github.io/kechenbiao-biao/11/14.csv', { headers })
         .then(response => response.text())
         .then(data => {
           let lines = data.split('\n');
