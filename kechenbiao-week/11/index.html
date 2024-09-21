@@ -30,7 +30,7 @@
   const currentTime = now.toLocaleTimeString();
 
   // 使用 Fetch API 读取 CSV 文件
-  fetch('http://211.149.232.25:55/kechenbiao-week/11/week.csv')
+  fetch('https://allen-china.github.io/kechenbiao-week/11/week.csv')
   .then(response => response.text())
   .then(data => {
       const lines = data.split('\n');
