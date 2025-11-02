@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--读取 CSV 并突出显示当前时间段-->
+  <!--读取 CSV 并突出显示当前时间段-->
+  <!--读取 CSV 并突出显示当前时间段-->
+  <!--读取 CSV 并突出显示当前时间段-->
+  <!--读取 CSV 并突出显示当前时间段-->
+  <title>教师每天-时间段任务计划安排</title>
+  <!--读取 CSV 并突出显示当前时间段-->
+  <!--读取 CSV 并突出显示当前时间段-->
+  <!--读取 CSV 并突出显示当前时间段-->
+  <!--读取 CSV 并突出显示当前时间段-->
+  <!--读取 CSV 并突出显示当前时间段-->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: black;
+    }
+
+    #csvContent {
+      font-size: 20px;
+      color: white;
+    }
+
+  .highlight {
+      font-weight: bold;
+      font-size: 48px;  /* 字体增大两倍 */
+      color: yellow;  /* 改为黄色 */
+    }
+  </style>
+</head>
+
+<body>
+  <div id="csvContent"></div>
+
+  <script>
+    function highlightCurrentActivity() {
+      fetch("./daily_plan.csv")
+   .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP 错误！状态: ${response.status}`);
+        }
+        return response.text();
+      })
+   .then(csvData => {
+        var lines = csvData.split("\n");
+        var currentTime = new Date();
+        var currentHour = currentTime.getHours();
+        var currentMinute = currentTime.getMinutes();
+
+        var content = "";
+        for (var line of lines) {
+          var parts = line.split('","');
+          if (parts.length === 2) {
+            var timeRange = parts[0].replace(/"/g, '');
+            var startHour = parseInt(timeRange.split(" - ")[0].split(":")[0]);
+            var startMinute = parseInt(timeRange.split(" - ")[0].split(":")[1]);
+            var endHour = parseInt(timeRange.split(" - ")[1].split(":")[0]);
+            var endMinute = parseInt(timeRange.split(" - ")[1].split(":")[1]);
+
+            if ((currentHour > startHour || (currentHour === startHour && currentMinute >= startMinute)) && (currentHour < endHour || (currentHour === endHour && currentMinute < endMinute))) {
+              content += "<span class='highlight'>" + line + "</span><br>";
+            } else {
+              content += line + "<br>";
+            }
+          }
+        }
+        document.getElementById('csvContent').innerHTML = content;
+      })
+   .catch(error => {
+        console.error('获取 CSV 数据时出错:', error);
+        document.getElementById('csvContent').innerHTML = '获取 CSV 数据时出错';
+      });
+    }
+
+    // 每 10 分钟刷新一次
+    setInterval(highlightCurrentActivity, 10 * 60 * 1000);
+
+    highlightCurrentActivity();
+  </script>
+
+</body>
+
+</html>
