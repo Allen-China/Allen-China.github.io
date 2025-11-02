@@ -212,8 +212,39 @@
 
     // 将时间字符串转换为分钟数（便于比较）
     function timeToMinutes(timeStr) {
+      if (!timeStr || !timeStr.includes(':')) return -1;
+      
       const [hours, minutes] = timeStr.split(':').map(Number);
       return hours * 60 + minutes;
+    }
+
+    // 解析CSV行，处理引号包裹的情况
+    function parseCSVLine(line) {
+      // 移除行首尾的引号
+      const cleanLine = line.replace(/^"|"$/g, '');
+      
+      // 分割字段，但要注意内容中可能包含逗号
+      const parts = [];
+      let currentPart = '';
+      let inQuotes = false;
+      
+      for (let i = 0; i < cleanLine.length; i++) {
+        const char = cleanLine[i];
+        
+        if (char === '"') {
+          inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+          parts.push(currentPart.trim());
+          currentPart = '';
+        } else {
+          currentPart += char;
+        }
+      }
+      
+      // 添加最后一个部分
+      parts.push(currentPart.trim());
+      
+      return parts;
     }
 
     // 初始化页面
@@ -249,8 +280,12 @@
           let hasCurrentItem = false;
           
           lines.forEach(line => {
-            const [day, timeRange, ...contentParts] = line.split(',');
-            const content = contentParts.join(',');
+            const parts = parseCSVLine(line);
+            if (parts.length < 3) return;
+            
+            const day = parts[0];
+            const timeRange = parts[1];
+            const content = parts[2];
             
             if (!day || !timeRange) return;
             
@@ -258,7 +293,7 @@
             scheduleItem.className = 'schedule-item';
             
             // 检查是否是当前时间段
-            if (day.includes(currentDay)) {
+            if (day.includes(currentDay) && timeRange.includes('-')) {
               const [startTime, endTime] = timeRange.split('-');
               const startMinutes = timeToMinutes(startTime);
               const endMinutes = timeToMinutes(endTime);
