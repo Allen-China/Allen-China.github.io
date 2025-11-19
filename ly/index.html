@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>本地MP3播放器</title>
+    <style>
+        /* 简单样式：居中显示 + 美化界面 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Arial", sans-serif;
+        }
+        body {
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .player-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+        /* 音频播放器样式（自定义原生控件） */
+        audio {
+            width: 100%;
+            height: 50px;
+            margin-bottom: 20px;
+            outline: none;
+        }
+        /* 提示文本样式 */
+        .tip {
+            color: #666;
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        .tip span {
+            color: #2c3e50;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="player-container">
+        <h1>本地MP3在线播放器</h1>
+        
+        <!-- 核心：HTML5 音频播放器 -->
+        <!-- 注意：src 属性填写你的MP3文件名（需与index.html同目录） -->
+        <audio 
+            controls  <!-- 显示原生播放控件（播放/暂停、进度条、音量等） -->
+            preload="metadata"  <!-- 预加载音频元数据（如时长，不加载完整文件） -->
+            autoplay="false"    <!-- 禁止自动播放（浏览器政策限制） -->
+        >
+            <!-- 兼容不同浏览器（实际MP3只需写一个，此处为规范写法） -->
+            <source src="1.mp3" type="audio/mpeg">
+            您的浏览器不支持HTML5音频播放，请更新浏览器！
+        </audio>
+
+        <!-- 使用说明 -->
+        <div class="tip">
+            <p>1. 确保此 <span>index.html</span> 与你的MP3文件在<strong>同一文件夹</strong></p>
+            <p>2. 将上方 <span>src="你的MP3文件名.mp3"</span> 中的“你的MP3文件名”替换为实际文件名（如 music.mp3）</p>
+            <p>3. 直接用浏览器打开此HTML文件即可播放</p>
+        </div>
+    </div>
+
+    <script>
+        // 可选功能：自动检测当前目录下的MP3（需后端支持，纯前端受浏览器安全限制无法实现）
+        // 若需“自动识别MP3”，需配合后端（如Python Flask/Node.js），以下是前端接收后端MP3列表的示例代码（需后端配合）
+        // fetch('/get-mp3-list')  // 后端接口：返回当前目录下的MP3文件名列表
+        // .then(res => res.json())
+        // .then(mp3List => {
+        //     const audio = document.querySelector('audio');
+        //     if (mp3List.length > 0) {
+        //         audio.src = mp3List[0];  // 自动加载第一个MP3
+        //         alert(`已自动加载MP3：${mp3List[0]}`);
+        //     }
+        // });
+    </script>
+</body>
+</html>
